@@ -1,12 +1,29 @@
 package com.laryssa.larywear.entity;
 
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.PositiveOrZero;
+
 import java.math.BigDecimal;
 
+@Entity
+@Table(name = "products")
 public class Product {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+
+    @NotBlank
     private String name;
+
+    @NotNull
+    @PositiveOrZero
     private BigDecimal price;
+
+    @PositiveOrZero
     private int stock;
+
 
     public Product() {
     }
@@ -20,7 +37,6 @@ public class Product {
     public Long getId() {
         return id;
     }
-
 
     public String getName() {
         return name;
