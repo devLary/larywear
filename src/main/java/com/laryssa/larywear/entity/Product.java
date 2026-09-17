@@ -6,6 +6,8 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.PositiveOrZero;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Entity
 @Table(name = "products")
@@ -21,6 +23,9 @@ public class Product {
     @PositiveOrZero
     private BigDecimal price;
 
+    @OneToMany(mappedBy = "product")
+    private List<ProductVariant> variants = new ArrayList<>();
+
 
     public Product() {
     }
@@ -28,6 +33,11 @@ public class Product {
     public Product(String name, BigDecimal price) {
         this.name = name;
         this.price = price;
+    }
+
+    public void addVariant(ProductVariant newVariant){
+        variants.add(newVariant);
+        newVariant.setProduct(this);
     }
 
     public Long getId() {
@@ -50,4 +60,11 @@ public class Product {
         this.price = price;
     }
 
+    public List<ProductVariant> getVariants() {
+        return variants;
+    }
+
+    public void setVariants(List<ProductVariant> variants) {
+        this.variants = variants;
+    }
 }

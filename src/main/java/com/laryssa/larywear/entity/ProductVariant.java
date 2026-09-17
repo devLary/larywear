@@ -26,15 +26,18 @@ public class ProductVariant {
     @PositiveOrZero
     private int stock;
 
+    @ManyToOne
+    private Product product;
 
     public ProductVariant() {
     }
 
-    public ProductVariant(String sku, Size size, Color color, int stock) {
+    public ProductVariant(String sku, Size size, Color color, int stock, Product product) {
         this.sku = sku;
         this.size = size;
         this.color = color;
         this.stock = stock;
+        this.product = product;
     }
 
     public Long getId() {
@@ -71,5 +74,13 @@ public class ProductVariant {
 
     public void setStock(int stock) {
         this.stock = stock;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }
